@@ -1,0 +1,211 @@
+{
+  "primitives": [
+    {
+      "queries": [
+        "int", "ints", "integer", 
+        "number", "numbers",
+        "signed int", "unsigned int",
+        "sint8", "int16", "int32", "uint8", "uint16", "uint32"
+      ],
+      "object": {
+        "name": "Integers/Numbers",
+        "description": "**Integers**, or **integral data types**, are [types](https://en.wikipedia.org/wiki/Data_type) that represent a range of *integers*, or *whole numbers*.\n\rIn [**C**](https://en.wikipedia.org/wiki/C_(programming_language)), these types include:\n`short` or `Int16`: represents *-32,767 to +32,767*;\n`int` or `Int32`: represents *-2,147,483,648 to +2,147,483,648*;\n`long` or `Int64`: represents negative to positive *nine quintillion*.\n\rIn C, these types can be *signed* (a range that spans from a negative to positive value), or *unsigned* (a range that spans from 0 to a positive value).\n\rIn [**Lua**](https://en.wikipedia.org/wiki/Lua_(programming_language)), integers and other numbers like decimals ([*floating-point numbers*](https://en.wikipedia.org/wiki/Floating-point_arithmetic), or [*rational numbers*](https://en.wikipedia.org/wiki/Rational_number)) are handled with the `number` type.\n***Note: SRB2's Lua doesn't support floating-point or fractional numbers out of the box. Please use the wiki command with `FRACUNIT` for more information.***\n\r[**Click here**](https://en.wikipedia.org/wiki/C_data_types) to read more about **C**'s data types.\n[**Click here**](https://www.lua.org/pil/2.3.html) to read more information about **Lua**'s `number` type.",
+        "url": "https://en.wikipedia.org/wiki/Integer_(computer_science)"
+      }
+    },
+    {
+      "queries": ["strings", "string", "plain text", "words"],
+      "object":{
+        "name":"String",
+        "description":"The `string` [type](https://en.wikipedia.org/wiki/Data_type) represents plain text, or a sequence of individual characters.\n\rThe sentence \"Did you get all those Chaos Emeralds?\" is an example of a valid `string` in both [**C**](https://en.wikipedia.org/wiki/C_(programming_language)) and [**Lua**](https://en.wikipedia.org/wiki/Lua_(programming_language)).\n\r[**Click here**](https://en.wikipedia.org/wiki/C_string_handling) for more detail about how **C** handles strings.\n[**Click here**](https://www.lua.org/pil/2.4.html) for more detail about how **Lua** handles strings.",
+        "url":"https://en.wikipedia.org/wiki/String_(computer_science)"
+      }
+    },
+    {
+      "queries": ["bools", "booleans", "bool", "boolean", "true", "false", "truthy", "falsy", "falsey"],
+      "object":{
+        "name":"Boolean",
+        "description":"The `boolean` [type](https://en.wikipedia.org/wiki/Data_type) represents data that can have only one of two values: `true` or `false`.\n\rBooleans are used mostly with [*conditional statements*](https://en.wikipedia.org/wiki/Conditional_(computer_programming)), or sections of code where a condition must be checked before continuing.\n\rExample:\n```lua\nif condition then\n   -- do something\nelse\n   -- do something else\nend```",
+        "url":"https://en.wikipedia.org/wiki/Boolean_data_type"
+      }
+    },
+    {
+      "queries": ["fixed-point", "fixed-point number", "fixed-point numbers", "fixed-point math", "fracunit", "fracbit", "fixed", "fixed_t"],
+      "object":{
+        "name":"fixed_t (FRACUNITs and Fixed-Point Numbers)",
+        "description":"`fixed_t` is a [type](https://en.wikipedia.org/wiki/Data_type) that represents a **fixed-point number**. These are values that are multiples of the constant, `FRACUNIT`, which represents [integers](https://en.wikipedia.org/wiki/Integer) (or *whole numbers*). Values in-between multiples of `FRACUNIT` are considered non-whole numbers (or [*rational numbers*](https://en.wikipedia.org/wiki/Rational_number)) in this system.\n\rFor example, in SRB2:\n   • `FRACUNIT` is `1 fixed_t`;\n   • `2 * FRACUNIT` is `2 fixed_t`;\n   • `FRACUNIT / 2` is `0.5 fixed_t`.\n\rMany of SRB2's functions use `fixed_t` and `FRACUNIT`s; this is a carry-over from SRB2's roots in the [Doom Legacy](https://doomwiki.org/wiki/Doom_Legacy) engine.",
+        "url":"https://doomwiki.org/wiki/Fixed_point"
+      }
+    },
+    {
+      "queries": ["angles", "angle", "ang", "angle_", "angle_t"],
+      "object":{
+        "name":"angle_t",
+        "description":"",
+        "url":""
+      }
+    },
+    {
+      "queries": ["tic", "tic_t"],
+      "object":{
+        "name":"",
+        "description":"",
+        "url":""
+      }
+    },
+    {
+      "queries": ["enum"],
+      "object":{
+        "name":"",
+        "description":"",
+        "url":""
+      }
+    },
+    {
+      "queries": ["array"],
+      "object":{
+        "name":"",
+        "description":"",
+        "url":""
+      }
+    }
+  ],
+  "commons": [
+    {
+      "queries": [ "lua" ],
+      "object": {
+        "name": "Lua",
+        "description": "Lua is a scripting language that can be used by SRB2. It allows users to write custom game logic without editing the game's source code. A file created in the Lua language is commonly called a 'Lua script'.",
+        "url": "https://wiki.srb2.org/wiki/Lua"
+      }
+    },
+    {
+      "queries": [ "syntax", "lua syntax", "lua/syntax" ],
+      "object": {
+        "name": "Lua Syntax",
+        "description": "This article gives an overview of the basic language features and syntax of SRB2's Lua implementation. It is not intended as a tutorial for Lua newcomers or a complete documentation of the language.",
+        "url": "https://wiki.srb2.org/wiki/Lua/Syntax"
+      }
+    },
+    {
+      "queries": [ "metatable", "metatables", "lua metatable", "lua metatables", "lua/metatable", "lua/metatables" ],
+      "object": {
+        "name": "Metatables",
+        "description": "Metatables are an advanced feature of Lua that can be used to define custom operations for variables. Each variable has a set of metatable events that are called in certain situations, usually when a particular operator is used on the variable.",
+        "url": "https://wiki.srb2.org/wiki/Lua/Metatables"
+      }
+    },
+    {
+      "queries": [ "action", "actions", "soc action", "lua action", "soc actions", "lua actions", "a_" ],
+      "object": {
+        "name": "Actions",
+        "description": "Actions are a special group of functions that determine what an Object does during a given state. They are used to control the interaction of Objects with the player and the level environment.",
+        "url": "https://wiki.srb2.org/wiki/Actions"
+      }
+    },
+    {
+      "queries": [ "constant", "constants", "soc constant", "lua constant", "soc constants", "lua constants" ],
+      "object": {
+        "name": "Constants",
+        "description": "This is a comprehensive list of all constants that can be used in SOCs and Lua scripts. Constants are special keywords recognized by SRB2, such as FRACUNIT and TICRATE, which represent a specific, unchangeable integer number.",
+        "url": "https://wiki.srb2.org/wiki/Constants"
+      }
+    },
+    {
+      "queries": [ "function", "functions", "lua function", "lua functions" ],
+      "object": {
+        "name": "Lua Functions",
+        "description": "This is a comprehensive list of all functions that can be utilized by Lua scripting, excluding those that are part of userdata structures.\n\rFor more information about Lua functions, use the help command for `functions`.\n\rFor Kart-specific functions, please search for \"kart functions\".",
+        "url": "https://wiki.srb2.org/wiki/Lua/Functions"
+      }
+    },
+    {
+      "queries": [ "global", "globals", "global variable", "global variables", "globals variables", "lua global", "lua globals", "lua global variable", "lua global variables", "lua globals variables" ],
+      "object": {
+        "name": "Global Variables",
+        "description": "This is a list of all pre-defined global variables and tables that are accessible by Lua.",
+        "url": "https://wiki.srb2.org/wiki/Lua/Global_variables"
+      }
+    },
+    {
+      "queries": [ "hook", "hooks", "lua hook", "lua hooks" ],
+      "object": {
+        "name": "Lua Hooks",
+        "description": "A Lua hook is an event that occurs within SRB2 that Lua functions may be bound to. Hooks allow users to insert custom game logic into SRB2 via Lua.\n\rFor more information about how to use hooks, use the help command for `hooks`. For Kart-specific hooks, please search for \"kart hooks\".",
+        "url": "https://wiki.srb2.org/wiki/Lua/Hooks"
+      }
+    },
+    {
+      "queries": [ "struct", "structs", "userdata", "userdatas", "userdata struct", "userdata structs", "userdata structure", "userdata structures", "lua struct", "lua structs", "lua userdata", "lua userdata struct", "lua userdata structs", "lua userdata structure", "lua userdata structures" ],
+      "object": {
+        "name": "Userdata Structures",
+        "description": "This article lists all the userdata types available for Lua in SRB2, as well as the variables they contain. Userdata structs in SRB2 represent different types of data from SRB2's source code.",
+        "url": "https://wiki.srb2.org/wiki/Lua/Userdata_structures"
+      }
+    },
+    {
+      "queries": [ "kart struct", "kart structs", "kart userdata", "kart userdatas", "kart userdata struct", "kart userdata structs", "kart userdata structure", "kart userdata structures", "kart lua struct", "kart lua structs", "kart lua userdata", "kart lua userdata struct", "kart lua userdata structs", "kart lua userdata structure", "kart lua userdata structures" ],
+      "object": {
+        "name": "Kart Userdata Structures",
+        "description": "This article lists all the userdata types available for Lua in SRB2 Kart, as well as the variables they contain. Userdata structs in SRB2 represent different types of data from SRB2's source code.\n\rFor Kart-specific structs, please search for \"kart structs\".",
+        "url": "https://wiki.srb2.org/wiki/Lua/Kart/Userdata_structures"
+      }
+    },
+    {
+      "queries": [ "kart function", "kart functions", "kart lua function", "kart lua functions" ],
+      "object": {
+        "name": "Kart Lua Functions",
+        "description": "This page gathers all Lua functions that are specific to SRB2Kart, or differ from SRB2 v2.1's default functionality. For further reading on how these work, please see its respective functions page.",
+        "url": "https://wiki.srb2.org/wiki/Lua/Kart/Functions"
+      }
+    },
+    {
+      "queries": [ "kart hook", "kart hooks", "kart lua hook", "kart lua hooks" ],
+      "object": {
+        "name": "Kart Lua Hooks",
+        "description": "This page gathers all Lua hooks that are specific to SRB2Kart, or differ from SRB2 v2.1's default functionality. For further reading on how these work, please see its respective hooks page. ",
+        "url": "https://wiki.srb2.org/wiki/Lua/Kart/Hooks"
+      }
+    },
+    {
+      "queries": [ "hud" ],
+      "object": {
+        "name": "HUD",
+        "description": "The heads-up display (HUD) is a set of screen elements (also known \"HUD items\") that are displayed on the top and bottom of the screen while the player is in a level. Its contents depend on the type of level the player is in, but it typically displays information such as the time the player has spent in the level, their score and number of collected rings, their character and number of lives. The position of the items that constitute the HUD on the screen can be changed via SOC or Lua.",
+        "url": "https://wiki.srb2.org/wiki/Head-up_display"
+      }
+    },
+    {
+      "queries": [ "hud library", "lua hud" ],
+      "object": {
+        "name": "HUD library",
+        "description": "These are the functions included in SRB2's HUD library. These functions relate to the head-up display, and are all prefixed with `hud.` (aside from the patch/string drawing functions).",
+        "url": "https://wiki.srb2.org/wiki/Lua#HUD_library"
+      }
+    },
+    {
+      "queries": [ "sound and music", "sounds and music", "sound and music tutorial", "sounds and music tutorial", "sound tutorial", "sounds tutorial", "sound effect tutorial", "music tutorial", "custom sound", "custom sounds", "custom music", "custom sound tutorial", "custom sounds tutorial", "custom music tutorial" ],
+      "object": {
+        "name": "Sound and music tutorial",
+        "description": "Custom sounds and music are common in SRB2 addons. This tutorial teaches you how to add them to WAD or PK3 files. If you want custom music to be played in your custom level, see the level header article.",
+        "url": "https://wiki.srb2.org/wiki/Sound_and_music_tutorial"
+      }
+    },
+    {
+      "queries": [ "sound", "sounds", "sound effects" ],
+      "object": {
+        "name": "Sound",
+        "description": "Sounds, or sound effects, are used for a variety of different purposes in SRB2. Aside from sound effects that are hardcoded into the game, such as the menu sounds, there are also ways to play back sounds that can be customized for use in addons, for example through SOC, Lua or linedef executors. SRB2 currently includes 409 sounds as well as 1600 free slots for custom sounds.",
+        "url": "https://wiki.srb2.org/wiki/Sound"
+      }
+    },
+    {
+      "queries": [ "mobj", "object" ],
+      "object": {
+        "name": "Object",
+        "description": "In SRB2, an object is an entities that exist in a map that are not part of the level geometry. For example, the player, enemies and rings are Objects, whereas sectors and linedefs are not. The term itself is short for \"map Object\"; \"mobj\" is an alternative abbreviation most commonly used within the source code.",
+        "url": "https://wiki.srb2.org/wiki/Object"
+      }
+    }
+  ]
+}
