@@ -17,6 +17,14 @@ using static SRB2WikiBot.GuildTimerCollection;
 
 namespace SRB2WikiBot
 {
+    /// <summary>
+    /// This class contains all of the cache collections for the bot,
+    /// including but not limited to:
+    /// <para>* guild-specific prefixes;</para>
+    /// <para>* common wiki search items;</para>
+    /// <para>* cooldown messages;</para>
+    /// <para>* the total query count for the bot.</para>
+    /// </summary>
     internal sealed class CacheCollection
     {
         private static readonly Lazy<CacheCollection> _instance = new(() => new());

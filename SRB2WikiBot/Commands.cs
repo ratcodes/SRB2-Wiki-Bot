@@ -241,37 +241,47 @@ namespace SRB2WikiBot
         [Command("wiki")]
         public async Task Wiki(CommandContext ctx, params string[] q)
         {
+            /*
+                Local functions.
+
+                Each separate attempt to parse the user's initial query is 
+                encapsulated into a local function for each operation.
+
+                To add a new one, define a local function here, and add it to the 
+                Try/Catch block below. Close the region to hide their definitions.
+             */
             #region Local Functions
-            // Checks and sends a default response to this command if called without any query.
-            static async Task<bool> IsDefaultWikiCommand(CommandContext ctx, string query)
-            {
-                if (string.IsNullOrWhiteSpace(query))
-                {
-                    if (!await CheckCooldown(ctx, "wikidefault"))
-                    {
-                        await ctx.RespondAsync(new DiscordEmbedBuilder()
-                            .WithDescription(
-                                "The **SRB2 Wiki** is a community effort to provide helpful information about the game: Sonic Robo Blast 2!\n\n" +
-                                "You can find walkthroughs, trivia, editing information, and tutorials, at **https://wiki.srb2.org**\n\n" +
-                                $"**To search the SRB2 Wiki with this bot, enter:**\n{ctx.Prefix}wiki *<your search terms>*"
-                            )
-                            .WithThumbnail(Constants.DEFAULT_THUMBNAIL)
-                            .WithColor(DiscordColor.PhthaloBlue)
-                        );
-                    }
+            //
+            // --- "Internal" local functions ---
+            //
 
-                    return true;
-                }
-
-                return false;
-            }
             // Gets a lookup string from a json object.
-            static string GetWikiLookup(string json, out string redirect)
+            static string GetWikiLookup(string json, out string redirectDescription)
             {
                 //: If the rate-limit for the wiki is increased a bit,
                 //: rewrite these in order to support redirect-chaining.
 
-                redirect = "";
+                redirectDescription = "";
+
+                // Local function: check and get the redirect info from this json string.
+                static string? GetRedirect(string json, out string redirect)
+                {
+                    var snippet = JObject.Parse(json).SelectToken("query.search[0]")?.Value<string>("snippet");
+                    if (!string.IsNullOrWhiteSpace(snippet))
+                    {
+                        if (snippet.IsRedirect(out var page))
+                        {
+                            var title = JObject.Parse(json).SelectToken("query.search[0]")?.Value<string>("title");
+                            redirect = "Redirected from \"" + page + "\"";
+                            return $"page={page}";
+                        }
+                    }
+
+                    redirect = "";
+                    return null;
+                }
+
+                // Local function: Get the page id from this json string.
                 static string GetPageId(string json)
                 {
                     var jobj = JObject.Parse(json);
@@ -291,27 +301,12 @@ namespace SRB2WikiBot
 
                     return "";
                 }
-                static string? GetRedirect(string json, out string redirect)
-                {
-                    var snippet = JObject.Parse(json).SelectToken("query.search[0]")?.Value<string>("snippet");
-                    if (!string.IsNullOrWhiteSpace(snippet))
-                    {
-                        if (snippet.IsRedirect(out var page))
-                        {
-                            var title = JObject.Parse(json).SelectToken("query.search[0]")?.Value<string>("title");
-                            redirect = "Redirected from \"" + page + "\"";
-                            return $"page={page}";
-                        }
-                    }
-
-                    redirect = "";
-                    return null;
-                }
 
                 // Checks the page snippet for possible redirect directives,
                 // but returns a pageid regardless if it's successful or not
-                return GetRedirect(json, out redirect) ?? GetPageId(json);
+                return GetRedirect(json, out redirectDescription) ?? GetPageId(json);
             }
+
             // Attempts to parse a wiki page based on the passed parameters.
             static async Task<bool> TryParseWikiLookup(CommandContext ctx, string param, string redirect = "")
             {
@@ -330,8 +325,8 @@ namespace SRB2WikiBot
                     //? For now, the default thumbnail looks pretty nice.
                     //var thumbnailImage = jobj?.SelectToken("images[0]")?.Value<string>();
 
+                    // Convert the successful wiki response into a readable Discord embed
                     var embed = new DiscordEmbedBuilder();
-
                     if (!string.IsNullOrWhiteSpace(title))
                     {
                         if (title == "Main Page") return false;
@@ -374,6 +369,35 @@ namespace SRB2WikiBot
 
                 return false;
             }
+
+            //
+            // --- "Public" local functions ---
+            //
+
+            // Checks and sends a default response to this command if called without any query.
+            static async Task<bool> IsDefaultWikiCommand(CommandContext ctx, string query)
+            {
+                if (string.IsNullOrWhiteSpace(query))
+                {
+                    if (!await CheckCooldown(ctx, "wikidefault"))
+                    {
+                        await ctx.RespondAsync(new DiscordEmbedBuilder()
+                            .WithDescription(
+                                "The **SRB2 Wiki** is a community effort to provide helpful information about the game: Sonic Robo Blast 2!\n\n" +
+                                "You can find walkthroughs, trivia, editing information, and tutorials, at **https://wiki.srb2.org**\n\n" +
+                                $"**To search the SRB2 Wiki with this bot, enter:**\n{ctx.Prefix}wiki *<your search terms>*"
+                            )
+                            .WithThumbnail(Constants.DEFAULT_THUMBNAIL)
+                            .WithColor(DiscordColor.PhthaloBlue)
+                        );
+                    }
+
+                    return true;
+                }
+
+                return false;
+            }
+
             // Attempts to parse a direct URL to a wiki page.
             static async Task<bool> TryParseDirectLink(CommandContext ctx, string query)
             {
@@ -398,6 +422,7 @@ namespace SRB2WikiBot
 
                 return false;
             }
+
             // Attempts to parse a cached search item.
             static async Task<bool> TryParseSearchItem(CommandContext ctx, string query)
             {
@@ -408,6 +433,7 @@ namespace SRB2WikiBot
                 }
                 return false;
             }
+
             // Attempts to parse a Fuzzy String search result.
             static async Task<bool> TryParseFuzzy(CommandContext ctx, string query)
             {
@@ -447,6 +473,7 @@ namespace SRB2WikiBot
 
                 return false;
             }
+
             // Attempts to parse a raw query string, by submitting a request to the wiki directly. This is the last resort tryparse.
             static async Task<bool> TryParseRawQuery(CommandContext ctx, string query)
             {
@@ -493,7 +520,9 @@ namespace SRB2WikiBot
                     return true; // Prevents sending the default error msg
                 }
             }
-            // Checks the current query count to see if a milestone count was hit. Sends a special message if true.
+
+            // Checks the current query count to see if a milestone count was hit.
+            // Sends a special message if true.
             static async Task CheckMilestone(CommandContext ctx)
             {
                 if (!_cache.TryGetMilestone(out var count)) return;
@@ -511,6 +540,7 @@ namespace SRB2WikiBot
             }
             #endregion
 
+            // Attempt to parse the user's query.
             try
             {
                 // Lock.
