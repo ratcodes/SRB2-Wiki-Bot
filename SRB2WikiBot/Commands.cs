@@ -226,7 +226,7 @@ namespace SRB2WikiBot
             {
                 _cache.UpdatePrefix(ctx, prefix);
                 await ctx.RespondAsync(new DiscordEmbedBuilder()
-                    .WithDescription($"Successfully changed the prefix from: \"**{oldPrefix}**\" to: \"**{prefix}**\"")
+                    .WithDescription($"Successfully changed the prefix from: \" **{oldPrefix}** \" to: \" **{prefix}** \"")
                 );
             }
             catch (Exception ex)
