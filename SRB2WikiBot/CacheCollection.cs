@@ -166,6 +166,9 @@ namespace SRB2WikiBot
                 }
             }
 
+            // Free some memory by removing spent references used during dictionary creation. 
+            _searchItems.CloseCollection();
+
             // Create the aggregate lookup.
             _fuzzyAggregate = CompressedLookup.FromList(aggregateList);
             #endregion
