@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <SignAssembly>false</SignAssembly>
-    <Authors>ash f.</Authors>
+    <Authors>ash felix</Authors>
     <Company />
     <Nullable>enable</Nullable>
   </PropertyGroup>
