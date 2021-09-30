@@ -226,6 +226,9 @@ namespace SRB2WikiBot
         public IEnumerable<string> GetFuzzyKeys()
             => _fuzzyAggregate.Keys;
 
+        /// <summary>
+        /// Gets the values from the fuzzy aggregate based on the given key.
+        /// </summary>
         public IEnumerable<ISearchItem?> GetFuzzyResults(string key)
             => _fuzzyAggregate[key]; 
 
@@ -247,11 +250,9 @@ namespace SRB2WikiBot
         /// </summary>
         public string GetPrefix(ulong id)
         {
-            if(_prefixes.TryGetValue(id, out var value))
-            {
-                return value;
-            }
-            return "!";
+            if (!_prefixes.TryGetValue(id, out var value)) return "!";
+            
+            return value;
         }
 
         /// <summary>
